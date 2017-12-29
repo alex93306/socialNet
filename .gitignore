@@ -1,0 +1,21 @@
+.settings
+bin
+build.sh
+integration-repo
+.gradle
+
+classes/
+/build
+target/
+
+# Eclipse artifacts
+.classpath
+.projectF
+
+# IDEA artifacts and output dirs
+*.iml
+*.ipr
+*.iws
+.idea
+out
+test-output
