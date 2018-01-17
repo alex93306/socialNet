@@ -3,12 +3,14 @@ package org.mycompany.entities;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
  * Created by alex.ramanovich on 30.09.2017.
  */
 @javax.persistence.Entity
+@Table(name = "AppUser")
 public class User extends AbstractEntity {
 
     @Id
@@ -23,7 +25,7 @@ public class User extends AbstractEntity {
         this.id = id;
     }
 
-    private String username;
+    private String email;
     private String password;
 
     private String firstName;
@@ -33,12 +35,12 @@ public class User extends AbstractEntity {
     private LocalDateTime created;
     private LocalDateTime modified;
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

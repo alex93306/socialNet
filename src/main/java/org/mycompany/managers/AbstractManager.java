@@ -1,17 +1,18 @@
 package org.mycompany.managers;
 
+import org.mycompany.dao.AbstractDAO;
 import org.mycompany.dao.DAO;
 import org.mycompany.entities.AbstractEntity;
 
-public abstract class AbstractManager<T extends AbstractEntity> implements Manager<T> {
-    protected DAO<T> dao;
+public abstract class AbstractManager<V extends DAO<T>, T extends AbstractEntity> implements Manager<T> {
+    protected V dao;
 
-    public AbstractManager(DAO<T> dao) {
+    public AbstractManager(V dao) {
         this.dao = dao;
     }
 
     @Override
-    public T save(T t) {
+    public boolean save(T t) {
         return dao.save(t);
     }
 

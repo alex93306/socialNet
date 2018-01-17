@@ -1,5 +1,6 @@
 package org.mycompany.managers;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -9,8 +10,12 @@ import org.mycompany.dao.UserDAO;
 import org.mycompany.entities.User;
 
 import java.util.Random;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -21,7 +26,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class UserManagerImplTest {
     @InjectMocks
-    private UserManagerImpl appUserManager;
+    private UserManagerImpl manager;
     @Mock
     private UserDAO userDAO;
 
@@ -29,18 +34,21 @@ public class UserManagerImplTest {
     public void testSave() {
         // setup
         User user = new User();
-        Long expectedUserID = new Random().nextLong();
-        doReturn(expectedUserID).when(userDAO).save(user);
+        user.setEmail("my-email@gja.com");
+        doReturn(true).when(userDAO).save(user);
 
         // execution
-        Long actualUserID = appUserManager.save(user);
+        boolean actual = manager.save(user);
+        String s = "sdkfj";
+        UnaryOperator<String> f = s::concat;
 
         // verifying
         verify(userDAO).save(eq(user));
 
         // assertion
-        assertEquals(expectedUserID, actualUserID);
+        assertTrue(actual);
 
     }
+
 
 }

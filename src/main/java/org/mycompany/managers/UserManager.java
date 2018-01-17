@@ -7,4 +7,5 @@ import org.mycompany.entities.User;
  */
 public interface UserManager extends Manager<User> {
 
+    boolean authenticate(String email, String password);
 }
