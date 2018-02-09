@@ -17,7 +17,7 @@ public class UserJDBCDAOImpl implements UserDAO {
         boolean result = false;
         try {
             connection = ConnectionFactory.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO AppUser(email, password, firstName, lastName) VALUES (?, ?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO app_users(email, password, first_name, last_name) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
@@ -43,7 +43,7 @@ public class UserJDBCDAOImpl implements UserDAO {
         User user = null;
         try {
             connection = ConnectionFactory.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from AppUser WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from app_users WHERE id = ?");
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             user = null;

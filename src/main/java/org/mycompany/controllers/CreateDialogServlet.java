@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,7 +45,14 @@ public class CreateDialogServlet extends HttpServlet {
         if ("".equals(pathInfo)){
 
         }
-        List<User> userList = Arrays.asList(userManager.find(1L), userManager.find(4L));
+        HttpSession session = request.getSession();
+        if (session == null) {
+            User user = (User) session.getAttribute("user");
+            Long userID = user.getId();
+        } else {
+            
+        }
+        List<User> userList = Arrays.asList(userManager.find(1L));
         request.setAttribute("userList", userList);
         request.getRequestDispatcher(USER_DIALOGS_LIST_JSP).forward(request, response);
     }

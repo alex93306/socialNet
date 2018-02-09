@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * Created by alex.ramanovich on 30.09.2017.
  */
 @javax.persistence.Entity
-@Table(name = "AppUser")
+@Table(name = "app_users")
 public class User extends AbstractEntity {
 
     @Id

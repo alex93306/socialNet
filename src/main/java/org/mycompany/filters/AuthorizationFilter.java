@@ -21,7 +21,7 @@ public class AuthorizationFilter implements Filter {
 //        servletContext.getAttribute("")
 //        request.getPath
         String uri = request.getRequestURI();
-        if (!"/login".equals(uri) && token == null) {
+        if (!"/login".equals(uri) && !"/register".equals(uri) && token == null) {
             response.sendRedirect("/login");
             return;
         } else {

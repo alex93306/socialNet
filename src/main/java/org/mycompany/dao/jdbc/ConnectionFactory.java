@@ -13,7 +13,7 @@ public class ConnectionFactory {
     private static DataSource getDataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSource.setUrl("jdbc:sqlserver://localhost;database=socialnet");
+        dataSource.setUrl("jdbc:sqlserver://localhost;database=test");//todo: rename db
         dataSource.setUsername("sa");
         dataSource.setPassword("0000");
         return dataSource;

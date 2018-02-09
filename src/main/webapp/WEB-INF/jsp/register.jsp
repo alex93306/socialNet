@@ -12,16 +12,16 @@
             <input name="email" type="text"/>
         </div>
         <div>
-            <span>Password</span>
-            <input name="password" type="password"/>
-        </div>
-        <div>
             <span>First Name</span>
-            <input name="firstname" type="text"/>
+            <input name="first_name" type="text"/>
         </div>
         <div>
             <span>Last Name</span>
-            <input name="lastname" type="text"/>
+            <input name="last_name" type="text"/>
+        </div>
+        <div>
+            <span>Password</span>
+            <input name="password" type="password"/>
         </div>
         <div>
             <input type="submit" value="Create"/>

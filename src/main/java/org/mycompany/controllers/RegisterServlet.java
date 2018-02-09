@@ -3,6 +3,7 @@ package org.mycompany.controllers;
 import org.mycompany.entities.User;
 import org.mycompany.factories.UserFactory;
 import org.mycompany.managers.UserManager;
+import org.mycompany.transformers.UserTransformer;
 import org.mycompany.validators.UserValidator;
 import org.mycompany.validators.ValidationResult;
 
@@ -15,28 +16,26 @@ import java.io.IOException;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
-    public static final String JSP_USER_REGISTER = "WEB-INF/jsp/register.jsp";
+    public static final String JSP_WAIT_EMAIL_CONFIRM = "WEB-INF/jsp/waitEmailConfirm.jsp";
     private UserManager userManager = UserFactory.getUserManager();
-    private UserValidator userValidator = new UserValidator();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        user.setFirstName(request.getParameter("firstname"));
-        user.setLastName(request.getParameter("lastname"));
+        User user = UserTransformer.transform(request);
+        
         ValidationResult result = new ValidationResult();
-        userValidator.validateSave(user, result);
+        UserValidator.validateSave(user, result);
         if (result.hasError()) {
             request.setAttribute("errorResult", result);
-            request.getRequestDispatcher(JSP_USER_REGISTER).forward(request, response);
+            request.getRequestDispatcher(LoginServlet.JSP_LOGIN).forward(request, response);
             return;
         }
+        
         userManager.save(user);
-        request.setAttribute("result", "Saved!");
-        request.getRequestDispatcher(JSP_USER_REGISTER).forward(request, response);
+
+        
+        request.getRequestDispatcher(JSP_WAIT_EMAIL_CONFIRM).forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(JSP_USER_REGISTER).forward(request, response);
+        request.getRequestDispatcher(LoginServlet.JSP_LOGIN).forward(request, response);
     }
 }
